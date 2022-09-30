@@ -31,7 +31,7 @@ public class JwtProvider {
         UsuarioPrincipal usuarioPrincipal = (UsuarioPrincipal) authentication.getPrincipal();
         return Jwts.builder().setSubject(usuarioPrincipal.getUsername())
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(new Date().getTime() + expiration * 1000))
+                .setExpiration(new Date(new Date().getTime() + expiration * 3000))
                 .signWith(SignatureAlgorithm.HS512, secret).compact();
     }
 
@@ -52,7 +52,7 @@ public class JwtProvider {
         } catch (IllegalArgumentException e) {
             logger.error("");
         } catch (SignatureException e) {
-            logger.error("firma no valida");
+           logger.error("firma no valida");
         }
         return false;
     }
